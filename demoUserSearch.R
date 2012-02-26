@@ -1,0 +1,12 @@
+library(twitteR)
+library(tm)
+library(wordcloud)
+debug(hashTag)
+#source('userTextMine.R')
+source('hashTag.R')
+#v=userTextMine("rdatamining")
+qantas=hashTag("#qantas")
+findAssocs(qantas$TextMatrix, 'virgin', 0.1)
+
+allianz=hashTag("#allianz")
+findAssocs(allianz$TextMatrix, 'allianz', 0.3)

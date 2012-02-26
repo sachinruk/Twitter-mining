@@ -1,0 +1,15 @@
+*.a       # no .a files
+*.~
+.*~
+*~        #ignore temporary files
+!lib.a    # but do track lib.a, even though you're ignoring .a files above
+/TODO     # only ignore the root TODO file, not subdir/TODO
+build/    # ignore all files in the build/ directory
+Timesheet.*
+.~lock.Timesheet.xls#
+*Timesheet*
+*.asv
+*.orig
+*.*~
+textMine.R
+twitteR.pdf
