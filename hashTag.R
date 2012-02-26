@@ -1,7 +1,6 @@
-hashTag<-function (hashTag){
+hashTag<-function (hashTag, minFreq){
 tweets<- searchTwitter(hashTag, n=200)
 #convert to a data frame
-
 df <- do.call("rbind", lapply(tweets, as.data.frame))
 
 ###################################################
@@ -38,6 +37,7 @@ dictCorpus <- myCorpus
 # which requires packages Snowball, RWeka, rJava, RWekajars
 myCorpus <- tm_map(myCorpus, stemDocument)
 # stem completion
+#browser()
 myCorpus <- tm_map(myCorpus, stemCompletion, dictionary=dictCorpus)
 myDtm <- TermDocumentMatrix(myCorpus, control = list(minWordLength = 1))
 
@@ -50,9 +50,7 @@ m <- as.matrix(myDtm)
 # calculate the frequency of words
 v <- sort(rowSums(m), decreasing=TRUE)
 myNames <- names(v)
-k <- which(names(v)=="miners")
-myNames[k] <- "mining"
 d <- data.frame(word=myNames, freq=v)
-wordcloud(d$word, d$freq, min.freq=3)
+wordcloud(d$word, d$freq, min.freq=minFreq)
 list(freq=v, TextMatrix=myDtm)
 }
